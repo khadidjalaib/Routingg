@@ -1,16 +1,21 @@
 import { useHistory } from "react-router-dom";
-const CheckList = (props) => {
+import { useSelector , useDispatch} from "react-redux";
+import actions from "../../../actions/todo"
+const CheckList = () => {
   const history = useHistory();
+  const dispatch=useDispatch();
+  const list = useSelector(state=> state.list)
   return (
     <div>
       <ul>
-        {props.list.map((elt) => {
+        {list.map((elt) => {
           return (
             <li
-              onClick={() => {
-                history.push(`/details/${elt.id}`);
-              }}
-            >
+             
+            > <button onClick={() =>dispatch(actions.deletelist(elt.id)) }
+               >
+              cliquer
+            </button>
               {elt.tache}
             </li>
           );

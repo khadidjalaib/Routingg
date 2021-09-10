@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
+import {useSelector,useDispatch} from "react-redux";
+import actions from "../../../actions/todo";
 
 const InputBar = (props) => {
   const [input, setInput] = useState("");
+   const todo =useSelector((state)=>state.todo)
+  const dispatch=useDispatch();
   return (
     <div>
       <form
@@ -13,8 +17,10 @@ const InputBar = (props) => {
             id: nanoid(),
             tache: input,
           };
-
-          props.setList([...props.list, obj]);
+             dispatch(
+               actions.todolist(obj)
+             )
+          
           setInput("");
         }}
       >
