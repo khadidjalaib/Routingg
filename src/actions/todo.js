@@ -3,6 +3,11 @@ const todolist = (data) => ({
   payload: data,
 });
 
+const initial = (data) => ({
+  type: "INIT",
+  payload: data,
+});
+
 const deletelist = (id) => ({
   type: "TO-DELETE",
   payload: id,
@@ -10,4 +15,5 @@ const deletelist = (id) => ({
 export default {
   todolist,
   deletelist,
+  initial,
 };

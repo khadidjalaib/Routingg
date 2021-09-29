@@ -1,26 +1,25 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
-import {useSelector,useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import actions from "../../../actions/todo";
+import axios from "axios";
 
 const InputBar = (props) => {
   const [input, setInput] = useState("");
-   const todo =useSelector((state)=>state.todo)
-  const dispatch=useDispatch();
+  const todo = useSelector((state) => state.todo);
+  const dispatch = useDispatch();
   return (
     <div>
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
+          const reponse = await axios.post("http://localhost:5000/todos", {
+            task: input,
+            completed: false,
+          });
+          const obj = reponse.data.data;
+          dispatch(actions.todolist(obj));
 
-          const obj = {
-            id: nanoid(),
-            tache: input,
-          };
-             dispatch(
-               actions.todolist(obj)
-             )
-          
           setInput("");
         }}
       >

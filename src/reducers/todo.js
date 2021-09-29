@@ -2,11 +2,13 @@ const initialState = { list: [] };
 
 const todoReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "INIT":
+      return { list: action.payload };
     case "TO-DO":
       return { list: [...state.list, action.payload] };
     case "TO-DELETE":
       const listeFiltre = state.list.filter(
-        (item) => item.id !== action.payload
+        (item) => item._id !== action.payload
       );
       return { ...state, list: [...listeFiltre] };
     default:
